@@ -14,7 +14,7 @@ bl_info = {
     "author" : "Slipher3D",
     "description" : "Applies bevel, subsurf modifiers and smooths the mesh.",
     "blender" : (2, 80, 0),
-    "version" : (0, 0, 2),
+    "version" : (0, 0, 3),
     "location" : "",
     "warning" : "",
     "category" : "Object"
@@ -22,9 +22,9 @@ bl_info = {
 
 
 class AddBevelAndSubDiv(bpy.types.Operator):
-    """Add Bevel and Sub Div Mods"""
+    """Add Bevel and SubSurf Mods"""
     bl_idname = "object.bsd"
-    bl_label = "Add Bevel and SubDiv"
+    bl_label = "Add Bevel and SubSurf"
     bl_description = "Adds bevel and subsurf modifiers"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
@@ -49,7 +49,11 @@ class AddBevelAndSubDiv(bpy.types.Operator):
             if self.smoothapply is True:
                 bpy.ops.mesh.select_mode(use_extend=False, use_expand=False, type='FACE')
                 bpy.ops.mesh.select_all(action='SELECT')
-            bpy.ops.mesh.faces_shade_smooth()
+                bpy.ops.mesh.faces_shade_smooth()
+            else:
+                bpy.ops.mesh.select_mode(use_extend=False, use_expand=False, type='FACE')
+                bpy.ops.mesh.select_all(action='SELECT')
+                bpy.ops.mesh.faces_shade_flat()
             bpy.ops.object.editmode_toggle()
             bpy.ops.object.modifier_add(type='BEVEL')
             bpy.context.object.modifiers["Bevel"].limit_method = 'WEIGHT'
