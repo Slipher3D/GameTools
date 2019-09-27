@@ -14,7 +14,7 @@ bl_info = {
     "author" : "Slipher3D",
     "description" : "Applies bevel, subsurf modifiers and smooths the mesh.",
     "blender" : (2, 80, 0),
-    "version" : (0, 0, 3),
+    "version" : (0, 0, 2),
     "location" : "",
     "warning" : "",
     "category" : "Object"
