@@ -76,16 +76,20 @@ class MO_Renamer_OT_Operator(bpy.types.Operator):
 
             for o in sObjs:
                 on = o.name
-                o.name = on + self.suffix
-                on = o.name
-                o.name = self.prefix + on
+                if self.suffix != "":
+                    o.name = on + self.suffix
+                    on = o.name
+                if self.prefix != "":
+                    o.name = self.prefix + on
 
         else:
             for o in sObjs:
                 o.name = self.name
                 on = o.name
-                o.name = on + self.suffix
-                on = o.name
-                o.name = self.prefix + on
+                if self.suffix != "":
+                    o.name = on + self.suffix
+                    on = o.name
+                if self.prefix != "":
+                    o.name = self.prefix + on
 
         return {'FINISHED'}
