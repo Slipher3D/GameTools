@@ -12,10 +12,17 @@ bl_info = {
 
 import bpy
 
-from . gtools import BevelSubSurf_OT_Operator
-from . gtools import MO_Renamer_OT_Operator
+from . gtools import MO_Renamer_OT_Operator, GT_Property_Group, LC_Exporter_OT_Operator
 from . gtools_panel import Gtools_PT_Panel
 
-classes = (BevelSubSurf_OT_Operator, Gtools_PT_Panel, MO_Renamer_OT_Operator)
+classes = (Gtools_PT_Panel, MO_Renamer_OT_Operator, GT_Property_Group, LC_Exporter_OT_Operator)
 
-register, unregister = bpy.utils.register_classes_factory(classes)
+reg, unreg = bpy.utils.register_classes_factory(classes)
+
+def register():
+    reg()
+    bpy.types.Scene.custom_props = bpy.props.PointerProperty(type=GT_Property_Group)
+
+def unregister():
+    unreg()
+    del bpy.types.Scene.custom_props
